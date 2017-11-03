@@ -9,7 +9,17 @@ feature 'Article' do
       expect(page).to have_content 'Hello'
       expect(page).to have_content 'Article Title'
       expect(page).to have_content "This is article's body"
-      # save_and_open_screenshot
     end
+  end
+
+  scenario 'user can create an article' do
+    visit root_path
+    click_link 'Create New Article'
+    fill_in 'article[title]', with: 'New Article'
+    fill_in 'article[body]', with: 'Hey ho'
+    click_button 'Save'
+    expect(page).to have_content 'Hello'
+    expect(page).to have_content 'New Article'
+    expect(page).to have_content 'Hey ho'
   end
 end
