@@ -35,6 +35,11 @@ class ArticlesController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def share
+    flash[:notice] = "This article will be sent to #{params[:email]}"
+    redirect_to action: 'index'
+  end
+
   private
 
   def article_params

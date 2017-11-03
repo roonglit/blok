@@ -34,6 +34,17 @@ feature 'Article' do
       expect(page).to have_content 'Hello'
     end
 
+    scenario 'user can share an article to his friend' do
+      visit root_path
+      expect(page).to have_content 'Hello'
+      expect(page).to have_content 'Article Title'
+      expect(page).to have_content "This is article's body"
+      fill_in 'email', with: 'test@test.com'
+      click_button 'Send'
+      expect(page).to have_content 'This article will be sent to test@test.com'
+      expect(page).to have_content 'Hello'
+    end
+
     context 'another article exists' do
       before { create(:article, title: 'Second Article') }
 
