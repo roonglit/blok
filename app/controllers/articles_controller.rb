@@ -36,6 +36,8 @@ class ArticlesController < ApplicationController
   end
 
   def share
+    @article = Article.find(params[:id])
+    ArticleMailer.share(@article.id, params[:email]).deliver_now
     flash[:notice] = "This article will be sent to #{params[:email]}"
     redirect_to action: 'index'
   end
