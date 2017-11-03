@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ArticleMailer, type: :mailer do
-  describe "share" do
+  xdescribe "share" do
     let(:mail) { ArticleMailer.share }
 
     it "renders the headers" do
