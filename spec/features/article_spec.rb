@@ -65,9 +65,17 @@ feature 'Article' do
     click_link 'Create New Article'
     fill_in 'article[title]', with: 'New Article'
     fill_in 'article[body]', with: 'Hey ho'
+
+    image = Rails.root.join('spec/fixtures', 'sample.jpg')
+    attach_file('article[image]', image)
+
     click_button 'Save'
+
     expect(page).to have_content 'Hello'
     expect(page).to have_content 'New Article'
     expect(page).to have_content 'Hey ho'
+
+    click_link 'New Article'
+    expect(page).to have_css("img[src*='sample.jpg']")
   end
 end
