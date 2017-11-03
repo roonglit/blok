@@ -23,6 +23,31 @@ feature 'Article' do
       expect(page).to have_content 'New Article Name'
       expect(page).to have_content 'This is interesting'
     end
+
+    context 'another article exists' do
+      before { create(:article, title: 'Second Article') }
+
+      scenario 'user can edit second article' do
+        visit root_path
+        expect(page).to have_content 'Hello'
+        expect(page).to have_content 'Article Title'
+        expect(page).to have_content 'Second Article'
+
+        within(all('.article')[1]) do
+          expect(page).to have_content 'Second Article'
+          click_link 'Edit'
+        end
+
+        fill_in 'article[title]', with: 'New Article Name'
+        fill_in 'article[body]', with: 'This is interesting'
+        click_button 'Save'
+
+        expect(page).to have_content 'Article Title'
+        expect(page).not_to have_content 'Second Article'
+        expect(page).to have_content 'New Article Name'
+        expect(page).to have_content 'This is interesting'
+      end
+    end
   end
 
   scenario 'user can create an article' do
