@@ -24,6 +24,16 @@ feature 'Article' do
       expect(page).to have_content 'This is interesting'
     end
 
+    scenario 'user can delete an article' do
+      visit root_path
+      expect(page).to have_content 'Hello'
+      expect(page).to have_content 'Article Title'
+      expect(page).to have_content "This is article's body"
+      click_link 'Delete'
+      expect(page).not_to have_content 'Article Title'
+      expect(page).to have_content 'Hello'
+    end
+
     context 'another article exists' do
       before { create(:article, title: 'Second Article') }
 
