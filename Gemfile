@@ -58,6 +58,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webmock'
+  gem 'sinatra'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
